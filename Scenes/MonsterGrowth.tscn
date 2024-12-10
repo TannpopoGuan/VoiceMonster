@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5tuvq66mucfo"]
+
+[ext_resource type="Script" path="res://Scripts/monster.gd" id="1_lcnwp"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Gameroot" type="Node2D" parent="."]
+
+[node name="Monster" type="Sprite2D" parent="Gameroot"]
+script = ExtResource("1_lcnwp")

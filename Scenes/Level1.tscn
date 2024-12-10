@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0ajjyhwg3wag"]
+
+[ext_resource type="PackedScene" uid="uid://b2iv6e4d8wmli" path="res://Scenes/monster_scene.tscn" id="2_f4fkj"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="GameManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_1412g")
+
+[node name="ProgressLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="FeedbackLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MainTimerLabel" type="Label" parent="GameManager"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MainTimer" type="Timer" parent="GameManager"]
+
+[node name="MonsterScene" parent="GameManager" instance=ExtResource("2_f4fkj")]
