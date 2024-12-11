@@ -1,7 +1,9 @@
 extends Label
 
-var texts = ["さす", "さけ", "さる", "すし", "すき", 
-			 "せき", "きん", "きせ", "せん", "せい"]
+#var texts = ["さす", "さけ", "さる", "すし", "すき", 
+#			 "せき", "きん", "きせ", "せん", "せい"]
+var texts = ["カーカー", "カタカタ", "ガタガタ", "ガツガツ", "カラカラ", 
+			 "カンカン", "キンキン", "クタクタ", "クンクン", "コロコロ"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
