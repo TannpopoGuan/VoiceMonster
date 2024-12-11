@@ -121,7 +121,7 @@ public partial class SpeechRecognizer : Node
 					{
 						partialResult = currentPartialResult;
 						noChangeTimeOutStart = Time.GetTicksMsec();
-						CallDeferred("emit_signal", "OnPartialResult", partialResult);
+						CallDeferred("emit_signal", "OnPartialResult", partialResult); // when speechRecognizer emits OnPartialResult, partialResultText will be emitted
 					}
 					EndRecognition(recognizer);
 				}
