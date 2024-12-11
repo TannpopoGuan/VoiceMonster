@@ -19,6 +19,7 @@ var monster_scene = preload("res://Scenes/Level1.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
 	if ReadyTracker.ready_set == true:
 		print("GameManager ready already executed, skipping.")
 		return
@@ -26,11 +27,14 @@ func _ready() -> void:
 	#score
 	# Your one-time initialization code here
 	print("Ready is running for the first time.")
+
 	$MainTimer.start(300)
 	$MainTimerLabel.position = position + Vector2(0,20)
 	$ScoreLabel.text = "Score: " + str(score)
 	$ScoreLabel.position = position + Vector2(0,40)
+
 	print("111111")
+
 	#spawn_monster()
 	pass
 	
@@ -70,6 +74,7 @@ func spawn_monster():
 	
 	if spawn_count <= total_monsters:
 		#var new_monster = preload("res://Scenes/monster_scene.tscn").instantiate()  
+
 		var new_monster = monster_scene.instantiate()
 		add_child(new_monster)
 	 # Debugging: Confirm the type and available signals of the monster
@@ -96,6 +101,9 @@ func spawn_monster():
 func _on_monster_monster_defeated(points: Variant) -> void:
 	print("33333")
 	score += points
+
+	print("222222")
+
 	$ScoreLabel.text = "Score: " + str(score)
 	# Remove the defeated monster from the scene
 	#if $Monster != null:  # Check if the monster exists
