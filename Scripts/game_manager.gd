@@ -16,7 +16,6 @@ var monster_scene = preload("res://Scenes/Level1.tscn")
 @onready var progress_label = %ProgressLabel 
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -36,8 +35,11 @@ func _ready() -> void:
 	print("111111")
 
 	#spawn_monster()
+	
 	pass
 	
+
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if $MainTimer.is_stopped() == false:
@@ -57,6 +59,7 @@ func update_progress(defeated):
 
 func spawn_monster():
 	#######
+	print("spawn_monster")
 	await get_tree().create_timer(0.5).timeout
 	if spawn_count >= total_monsters:
 		feedback_label.text = "Game Over! Final Score: %d" % score
@@ -99,6 +102,7 @@ func spawn_monster():
 
 
 func _on_monster_monster_defeated(points: Variant) -> void:
+	
 	print("33333")
 	score += points
 

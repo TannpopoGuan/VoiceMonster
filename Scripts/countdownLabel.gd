@@ -5,8 +5,7 @@ var countdown_label = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	countdown_label = %CountdownLabel
-	countdown_label.position = Vector2(get_viewport_rect().size.x / 2 - countdown_label.size.x / 2, 30)
+	self.position = Vector2(get_viewport_rect().size.x / 2 - self.size.x / 2, 30)
 	self.scale = Vector2(1, 1)  # Keep countdown scale constant
 	self.modulate = Color(1, 1, 1)  # White color
 	pass # Replace with function body.
