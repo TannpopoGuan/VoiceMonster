@@ -1,7 +1,21 @@
+<<<<<<< HEAD
 [gd_scene load_steps=3 format=3 uid="uid://c0ajjyhwg3wag"]
 
 [ext_resource type="PackedScene" uid="uid://b2iv6e4d8wmli" path="res://Scenes/monster_scene.tscn" id="2_f4fkj"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
+=======
+[gd_scene load_steps=9 format=3 uid="uid://c0ajjyhwg3wag"]
+
+[ext_resource type="Texture2D" uid="uid://buijr8myotlog" path="res://Sprites/Monster.png" id="2_hgovj"]
+[ext_resource type="Script" path="res://Scripts/monster.gd" id="3_mlixr"]
+[ext_resource type="FontFile" uid="uid://dn8f5hd0f37e4" path="res://Fonts/Kosugi_Maru/KosugiMaru-Regular.ttf" id="4_6pow3"]
+[ext_resource type="Script" path="res://Scripts/monster_text.gd" id="5_jihcw"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
+[ext_resource type="Script" path="res://Scripts/countdownLabel.gd" id="6_jrbfr"]
+[ext_resource type="Script" path="res://Scripts/SpeechRecognizer.cs" id="7_m6g4b"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_751e5"]
+>>>>>>> eli
 
 [node name="Level1" type="Node2D"]
 
@@ -12,6 +26,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_1412g")
 
+<<<<<<< HEAD
+=======
+[node name="SpeechRecognizer" type="Node" parent="GameManager"]
+script = ExtResource("7_m6g4b")
+
+[node name="MicrophoneStream" type="AudioStreamPlayer" parent="GameManager"]
+stream = SubResource("AudioStreamMicrophone_751e5")
+volume_db = 9.946
+autoplay = true
+bus = &"Record"
+
+>>>>>>> eli
 [node name="ProgressLabel" type="Label" parent="GameManager"]
 unique_name_in_owner = true
 layout_mode = 0
@@ -26,13 +52,50 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 
 [node name="ScoreLabel" type="Label" parent="GameManager"]
+<<<<<<< HEAD
+=======
+layout_mode = 0
+>>>>>>> eli
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="MainTimerLabel" type="Label" parent="GameManager"]
+<<<<<<< HEAD
+=======
+layout_mode = 0
+>>>>>>> eli
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="MainTimer" type="Timer" parent="GameManager"]
 
+<<<<<<< HEAD
 [node name="MonsterScene" parent="GameManager" instance=ExtResource("2_f4fkj")]
+=======
+[node name="Monster" type="Sprite2D" parent="GameManager"]
+position = Vector2(586, 333)
+scale = Vector2(0.0573763, 0.0573763)
+texture = ExtResource("2_hgovj")
+script = ExtResource("3_mlixr")
+
+[node name="MonsterText" type="Label" parent="GameManager/Monster"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("4_6pow3")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("5_jihcw")
+metadata/_edit_use_anchors_ = true
+
+[node name="CountdownLabel" type="Label" parent="GameManager/Monster"]
+unique_name_in_owner = true
+offset_left = -10213.3
+offset_top = -5803.79
+offset_right = -10173.3
+offset_bottom = -5702.79
+theme_override_fonts/font = ExtResource("4_6pow3")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("6_jrbfr")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="monster_defeated" from="GameManager/Monster" to="GameManager" method="_on_monster_monster_defeated"]
+>>>>>>> eli

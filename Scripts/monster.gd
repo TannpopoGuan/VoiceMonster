@@ -20,10 +20,11 @@ signal monster_defeated(points)
 #@onready var monster_text_label = $MonsterText  #Generating Words
 @onready var monster_text_label = $MonsterText #Generating Words
 @onready var feedback_label = get_node("/root/Level1/GameManager/FeedbackLabel")  # Reference to feedback label
-
+var SpeechRecognizer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SpeechRecognizer = get_node("/root/Level1/GameManager/SpeechRecognizer")
 	countdown_label.text = "5"  # Reset countdown text for each new monster
 	countdown_label.position = position + Vector2(-600,-750)
 	set_process_input(true)  # Enable input detection to check for key press
@@ -32,11 +33,27 @@ func _ready() -> void:
 		monster_text_label.show_text()
 	if countdown_label != null:
 		countdown_label.start_countdown()
-
+	
+	SpeechRecognizer.StartSpeechRecognition()
+	SpeechRecognizer.connect("OnPartialResult", Callable(self, "_on_partial_result"))
+	SpeechRecognizer.connect("OnFinalResult", Callable(self, "_on_final_result") )
+	
+# if get signal from voice rec 
+#     -> check same string or not
+#	     if true: defeat
+func _on_partial_result(partial_result):
+	print("partial_result: ",partial_result)
+	if monster_text_label.text in partial_result:
+		print("You got it!")
+		monster_text_label.text = "You Got It!"
+		handle_defeat(true)
+		
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	monster_text_label.position = position + Vector2(-750,-200)
+	#monster_text_label.position = position + Vector2(-750,-200)
+	monster_text_label.position = position + Vector2(-950,-200)
 	
 	monster_timer += delta
 	countdown_label.text = str(ceil(5 - monster_timer))  # Update countdown timer
@@ -69,6 +86,7 @@ func _input(event):
 		#queue_free()  # Destroy the monster after it is defeated
 
 func handle_defeat(defeated_by_player: bool):
+	SpeechRecognizer.StopSpeechRecoginition()
 	if defeated_by_player:
 		# Determine points based on time taken
 		var points = 0
@@ -83,5 +101,6 @@ func handle_defeat(defeated_by_player: bool):
 		
 		score += points
 		countdown_label.visible = false  # Hide countdown
+		print("2222222")
 		emit_signal("monster_defeated", points)  # Emit points to GameManager
 		queue_free()  # Remove the monster instance

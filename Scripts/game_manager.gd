@@ -1,6 +1,8 @@
 extends Control
 
-#score
+
+#Solution: Define game manager as global script
+
 var score = 0
 #spawn monsters
 var spawn_count = 0       # Tracks the number of spawned monsters
@@ -8,22 +10,38 @@ var total_monsters = 10   # Total number of monsters
 var finalscore = 0             # Total score
 var progress_string = "S".repeat(total_monsters)  # Initializes with 'S' for pending monsters
 
+
+
+var monster_scene = preload("res://Scenes/Level1.tscn")
+
 @onready var feedback_label = %FeedbackLabel  
 @onready var progress_label = %ProgressLabel 
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+	if ReadyTracker.ready_set == true:
+		print("GameManager ready already executed, skipping.")
+		return
+	ReadyTracker.ready_set = true
+	#score
+	# Your one-time initialization code here
+	print("Ready is running for the first time.")
+
 	$MainTimer.start(300)
 	$MainTimerLabel.position = position + Vector2(0,20)
 	$ScoreLabel.text = "Score: " + str(score)
 	$ScoreLabel.position = position + Vector2(0,40)
-	for child in get_children():
-		print(child.name)
+
+	print("111111")
+
 	#spawn_monster()
+	
 	pass
 	
+
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if $MainTimer.is_stopped() == false:
@@ -34,14 +52,16 @@ func _process(delta: float) -> void:
 	
 func update_progress(defeated):
 	# Replace current monster's symbol based on outcome
+	
 	var current_status = "0" if defeated else "X"
 	progress_string = progress_string.substr(0, spawn_count) + current_status + progress_string.substr(spawn_count + 1)
 	progress_label.text = progress_string
-	spawn_count += 1  # Increment spawn_count only after processing the monster
+	#spawn_count += 1  # Increment spawn_count only after processing the monster
 	
 
 func spawn_monster():
 	#######
+	print("spawn_monster")
 	await get_tree().create_timer(0.5).timeout
 	if spawn_count >= total_monsters:
 		feedback_label.text = "Game Over! Final Score: %d" % score
@@ -55,11 +75,11 @@ func spawn_monster():
 		
 	#add a new monster
 	spawn_count += 1
+	print(spawn_count)
 	
 	if spawn_count <= total_monsters:
 		#var new_monster = preload("res://Scenes/monster_scene.tscn").instantiate()  
-		
-		var monster_scene = preload("res://Scenes/monster_scene.tscn")
+
 		var new_monster = monster_scene.instantiate()
 		add_child(new_monster)
 	 # Debugging: Confirm the type and available signals of the monster
@@ -79,9 +99,17 @@ func spawn_monster():
 
 	
 	
-func on_monster_defeated(points):
+
+	
+
+
+func _on_monster_monster_defeated(points: Variant) -> void:
+	
+	print("33333")
 	score += points
+
 	print("222222")
+
 	$ScoreLabel.text = "Score: " + str(score)
 	# Remove the defeated monster from the scene
 	#if $Monster != null:  # Check if the monster exists
@@ -104,3 +132,4 @@ func on_monster_defeated(points):
 	await get_tree().create_timer(0.5).timeout
 	
 	spawn_monster()  # Proceed to next monster if available
+	pass # Replace with function body.
