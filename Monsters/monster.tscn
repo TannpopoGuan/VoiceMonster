@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://unstbtpuybni"]
+
+[ext_resource type="Texture2D" uid="uid://buijr8myotlog" path="res://Sprites/Monster.png" id="1_uky23"]
+[ext_resource type="Script" path="res://Scripts/monster.gd" id="2_tjho4"]
+[ext_resource type="FontFile" uid="uid://dn8f5hd0f37e4" path="res://Fonts/Kosugi_Maru/KosugiMaru-Regular.ttf" id="3_hla1q"]
+[ext_resource type="Script" path="res://Scripts/monster_text.gd" id="4_2m2uq"]
+[ext_resource type="Script" path="res://Scripts/countdownLabel.gd" id="5_6n257"]
+[ext_resource type="Script" path="res://Scripts/IHearsYouSaid.gd" id="6_3gits"]
+
+[node name="Monster" type="Sprite2D"]
+position = Vector2(586, 333)
+scale = Vector2(0.0573763, 0.0573763)
+texture = ExtResource("1_uky23")
+script = ExtResource("2_tjho4")
+
+[node name="MonsterText" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("4_2m2uq")
+metadata/_edit_use_anchors_ = true
+
+[node name="CountdownLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -10213.3
+offset_top = -5803.79
+offset_right = -10173.3
+offset_bottom = -5702.79
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("5_6n257")
+metadata/_edit_use_anchors_ = true
+
+[node name="IHeardYouSaid" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = -0.241558
+anchor_bottom = 0.0368574
+offset_left = -121.862
+offset_top = 17.4286
+offset_right = 449.138
+offset_bottom = 118.429
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 100
+text = "I heard you said:"
+script = ExtResource("6_3gits")
+metadata/_edit_use_anchors_ = true

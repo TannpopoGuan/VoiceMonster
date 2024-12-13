@@ -6,7 +6,7 @@ var scale_speed = 0.15  # Growth rate
 var blink_threshold = 0.3  # The scale at which the monster blinks red
 var blink_duration = 0.2   # Duration of each blink
 var blink_timer = 0.0      # Timer to control blinking
-
+var is_defeated = false   # Flag to check if the monster is defeated
 # Timer for countdown
 var countdown_time = 5.0  # 5-second countdown
 
@@ -14,11 +14,11 @@ var countdown_time = 5.0  # 5-second countdown
 var monster_timer = 0.0   # Timer for current monster's life
 signal monster_defeated(points)
 
-
 @onready var countdown_label = $CountdownLabel 
 #@onready var countdown_label = get_node("/root/Level1/GameManager/CountdownLabel")
 #@onready var monster_text_label = $MonsterText  #Generating Words
 @onready var monster_text_label = $MonsterText #Generating Words
+@onready var IHeardYouSaid_label = $IHeardYouSaid #Generating Words
 @onready var feedback_label = get_node("/root/Level1/GameManager/FeedbackLabel")  # Reference to feedback label
 var SpeechRecognizer
 
@@ -41,17 +41,51 @@ func _ready() -> void:
 # if get signal from voice rec 
 #     -> check same string or not
 #	     if true: defeat
+func to_hiragana(text: String) -> String:
+	# 片假名到平假名的對應字典
+	var katakana_to_hiragana = {
+		"ア": "あ", "イ": "い", "ウ": "う", "エ": "え", "オ": "お",
+		"カ": "か", "キ": "き", "ク": "く", "ケ": "け", "コ": "こ",
+		"サ": "さ", "シ": "し", "ス": "す", "セ": "せ", "ソ": "そ",
+		"タ": "た", "チ": "ち", "ツ": "つ", "テ": "て", "ト": "と",
+		"ナ": "な", "ニ": "に", "ヌ": "ぬ", "ネ": "ね", "ノ": "の",
+		"ハ": "は", "ヒ": "ひ", "フ": "ふ", "ヘ": "へ", "ホ": "ほ",
+		"マ": "ま", "ミ": "み", "ム": "む", "メ": "め", "モ": "も",
+		"ヤ": "や", "ユ": "ゆ", "ヨ": "よ",
+		"ラ": "ら", "リ": "り", "ル": "る", "レ": "れ", "ロ": "ろ",
+		"ワ": "わ", "ヲ": "を", "ン": "ん",
+		"ガ": "が", "ギ": "ぎ", "グ": "ぐ", "ゲ": "げ", "ゴ": "ご",
+		"ザ": "ざ", "ジ": "じ", "ズ": "ず", "ゼ": "ぜ", "ゾ": "ぞ",
+		"ダ": "だ", "ヂ": "ぢ", "ヅ": "づ", "デ": "で", "ド": "ど",
+		"バ": "ば", "ビ": "び", "ブ": "ぶ", "ベ": "べ", "ボ": "ぼ",
+		"パ": "ぱ", "ピ": "ぴ", "プ": "ぷ", "ペ": "ぺ", "ポ": "ぽ",
+		"ャ": "ゃ", "ュ": "ゅ", "ョ": "ょ", "ッ": "っ", "ー": "ー"  # 小字和長音符
+		}
+
+	var hiragana_text = ""
+	for char in text:
+		if char in katakana_to_hiragana:
+			hiragana_text += katakana_to_hiragana[char]
+		else:
+			hiragana_text += char  # 非片假名字符直接保留
+	return hiragana_text
+	
 func _on_partial_result(partial_result):
-	print("partial_result: ",partial_result)
-	if monster_text_label.text in partial_result:
-		print("You got it!")
-		monster_text_label.text = "You Got It!"
+	
+	partial_result = partial_result.replace(" ", "").replace("\t", "")
+	var monster_text_hiragana = to_hiragana(monster_text_label.text)
+	var partial_result_hiragana = to_hiragana(partial_result)
+	print("I heard you said: ",partial_result_hiragana)
+	if monster_text_hiragana in partial_result_hiragana:
 		handle_defeat(true)
+	IHeardYouSaid_label.text = "I heard you said: " + partial_result_hiragana
 		
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if is_defeated:
+		return
 	#monster_text_label.position = position + Vector2(-750,-200)
 	monster_text_label.position = position + Vector2(-950,-200)
 	
@@ -86,10 +120,14 @@ func _input(event):
 		#queue_free()  # Destroy the monster after it is defeated
 
 func handle_defeat(defeated_by_player: bool):
+	if is_defeated:
+		return
+	is_defeated = true  
 	SpeechRecognizer.StopSpeechRecoginition()
+	var points = 0
 	if defeated_by_player:
 		# Determine points based on time taken
-		var points = 0
+		
 		if monster_timer < 1:
 			points = 5
 		elif monster_timer < 2:
@@ -100,7 +138,8 @@ func handle_defeat(defeated_by_player: bool):
 			points = 1
 		
 		score += points
-		countdown_label.visible = false  # Hide countdown
-		print("2222222")
-		emit_signal("monster_defeated", points)  # Emit points to GameManager
-		queue_free()  # Remove the monster instance
+	countdown_label.visible = false  # Hide countdown
+	print("handle_defeat")
+	emit_signal("monster_defeated", points)  # Emit points to GameManager
+	await get_tree().create_timer(1.0).timeout
+	queue_free()  # Remove the monster instance

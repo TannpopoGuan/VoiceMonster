@@ -12,7 +12,7 @@ var progress_string = "S".repeat(total_monsters)  # Initializes with 'S' for pen
 
 
 
-var monster_scene = preload("res://Scenes/Level1.tscn")
+var monster_scene = preload("res://Monsters/monster.tscn")
 
 @onready var feedback_label = %FeedbackLabel  
 @onready var progress_label = %ProgressLabel 
@@ -34,9 +34,9 @@ func _ready() -> void:
 	$ScoreLabel.text = "Score: " + str(score)
 	$ScoreLabel.position = position + Vector2(0,40)
 
-	print("111111")
+	print("game manager _ready")
 
-	#spawn_monster()
+	spawn_monster()
 	
 	pass
 	
@@ -87,12 +87,11 @@ func spawn_monster():
 	#print("Available signals: ", new_monster.get_signal_list())
 	
 	 # Safely connect the signal, ensuring it exists
-	#if new_monster.has_signal("monster_defeated"):
-		#new_monster.connect("monster_defeated", self, "on_monster_defeated")
-	#else:
-	#	print("Error: Signal 'monster_defeated' not found on monster instance.")
+		if new_monster.has_signal("monster_defeated"):
+			new_monster.connect("monster_defeated", Callable(self, "_on_monster_defeated"))
+		else:
+			print("Error: Signal 'monster_defeated' not found on monster instance.")
 
-		new_monster.connect("monster_defeated", Callable(self, "on_monster_defeated"))  # Connect signal once
 		progress_label.text = progress_string  # Update progress display
 		feedback_label.text = "Monster %d spawned!" % spawn_count  # Show feedback on spawn
 		$FeedbackLabel.position = position + Vector2(0,60)
@@ -103,12 +102,10 @@ func spawn_monster():
 	
 
 
-func _on_monster_monster_defeated(points: Variant) -> void:
+func _on_monster_defeated(points: Variant) -> void:
 	
-	print("33333")
+	print("Game Manager: _on_monster_defeated")
 	score += points
-
-	print("222222")
 
 	$ScoreLabel.text = "Score: " + str(score)
 	# Remove the defeated monster from the scene

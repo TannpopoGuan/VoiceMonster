@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Vosk;
+using System.Text.Json;
 
 public partial class SpeechRecognizer : Node
 {
@@ -140,8 +141,12 @@ public partial class SpeechRecognizer : Node
 
 	private string parsePartialResult(string result)
 	{
-		return result;
-		//return result.Substring(result.IndexOf("partial") + 6, result.IndexOf("\"") - result.IndexOf("partial") - 8);
+		var jsonDocument = JsonDocument.Parse(result);
+        // 從 JSON 中提取 "partial" 的值
+        if (jsonDocument.RootElement.TryGetProperty("partial", out JsonElement partialElement)){
+            return partialElement.GetString(); // 返回值
+        }
+		else return result;
 	}
 
 	private void EndRecognition(VoskRecognizer recognizer)
