@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdmugp4ihvfcw"]
+
+[ext_resource type="Texture2D" uid="uid://ccfbd7uh4st3p" path="res://background.webp" id="1_kwoky"]
+[ext_resource type="FontFile" uid="uid://bkyko7n0m2uif" path="res://Fonts/Kanit/Kanit-Black.ttf" id="2_wmakw"]
+[ext_resource type="Script" path="res://Scripts/level_1_button.gd" id="3_eqdbj"]
+[ext_resource type="Script" path="res://Scripts/level_2_button.gd" id="4_1px5y"]
+[ext_resource type="FontFile" uid="uid://eut1imobwv01" path="res://Fonts/Kanit/Kanit-Bold.ttf" id="5_u4qea"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_kwoky")
+
+[node name="Level1" type="Button" parent="."]
+offset_left = 220.0
+offset_top = 273.0
+offset_right = 676.0
+offset_bottom = 506.0
+theme_override_fonts/font = ExtResource("2_wmakw")
+theme_override_font_sizes/font_size = 100
+text = "Level1"
+script = ExtResource("3_eqdbj")
+
+[node name="Level2" type="Button" parent="."]
+offset_left = 1212.0
+offset_top = 266.0
+offset_right = 1688.0
+offset_bottom = 499.0
+theme_override_fonts/font = ExtResource("2_wmakw")
+theme_override_font_sizes/font_size = 100
+text = "Level2"
+script = ExtResource("4_1px5y")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 622.0
+offset_top = -57.0
+offset_right = 1382.0
+offset_bottom = 392.0
+theme_override_fonts/font = ExtResource("5_u4qea")
+theme_override_font_sizes/font_size = 250
+text = "Menu"
+
+[connection signal="pressed" from="Level1" to="Level1" method="_on_level1_pressed"]
+[connection signal="pressed" from="Level2" to="Level2" method="_on_level2_pressed"]
