@@ -54,7 +54,9 @@ func update_progress(defeated):
 	# Replace current monster's symbol based on outcome
 	
 	var current_status = "0" if defeated else "X"
-	progress_string = progress_string.substr(0, spawn_count) + current_status + progress_string.substr(spawn_count + 1)
+	
+	progress_string = progress_string.substr(0, spawn_count-1) + current_status + progress_string.substr(spawn_count)
+	
 	progress_label.text = progress_string
 	#spawn_count += 1  # Increment spawn_count only after processing the monster
 	
@@ -114,16 +116,10 @@ func _on_monster_defeated(points: Variant) -> void:
 	if points > 0:
 		feedback_label.text = "Points earned: %d" % points
 		$FeedbackLabel.position = position + Vector2(500,500)
-		var current_status = "0"
-		progress_string = progress_string.substr(0, spawn_count) + current_status + progress_string.substr(spawn_count + 1)
-		progress_label.text = progress_string
 		update_progress(true)  # Mark monster as defeated (0)
 	else:
 		feedback_label.text = "No points. Time up!"
 		$FeedbackLabel.position = position + Vector2(500,500)
-		var current_status = "X"
-		progress_string = progress_string.substr(0, spawn_count) + current_status + progress_string.substr(spawn_count + 1)
-		progress_label.text = progress_string
 		update_progress(false)  # Mark monster as not defeated (X)
 	# Update progress string
 	await get_tree().create_timer(0.5).timeout

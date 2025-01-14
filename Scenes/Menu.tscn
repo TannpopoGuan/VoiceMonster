@@ -9,35 +9,35 @@
 [node name="Menu" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1021.0
+offset_bottom = 775.0
 texture = ExtResource("1_kwoky")
 
 [node name="Level1" type="Button" parent="."]
-offset_left = 220.0
-offset_top = 273.0
-offset_right = 676.0
-offset_bottom = 506.0
+offset_left = 2.0
+offset_top = 330.0
+offset_right = 458.0
+offset_bottom = 563.0
 theme_override_fonts/font = ExtResource("2_wmakw")
 theme_override_font_sizes/font_size = 100
 text = "Level1"
 script = ExtResource("3_eqdbj")
 
 [node name="Level2" type="Button" parent="."]
-offset_left = 1212.0
-offset_top = 266.0
-offset_right = 1688.0
-offset_bottom = 499.0
+offset_left = 544.0
+offset_top = 325.0
+offset_right = 1020.0
+offset_bottom = 558.0
 theme_override_fonts/font = ExtResource("2_wmakw")
 theme_override_font_sizes/font_size = 100
 text = "Level2"
 script = ExtResource("4_1px5y")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 622.0
-offset_top = -57.0
-offset_right = 1382.0
-offset_bottom = 392.0
+offset_left = 193.0
+offset_top = -34.0
+offset_right = 953.0
+offset_bottom = 415.0
 theme_override_fonts/font = ExtResource("5_u4qea")
 theme_override_font_sizes/font_size = 250
 text = "Menu"

@@ -13,6 +13,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_1412g")
+metadata/_edit_use_anchors_ = true
 
 [node name="SpeechRecognizer" type="Node" parent="GameManager"]
 script = ExtResource("7_m6g4b")
@@ -28,6 +29,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
 
 [node name="FeedbackLabel" type="Label" parent="GameManager"]
 unique_name_in_owner = true
@@ -35,15 +37,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLabel" type="Label" parent="GameManager"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
 
 [node name="MainTimerLabel" type="Label" parent="GameManager"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
 
 [node name="MainTimer" type="Timer" parent="GameManager"]
