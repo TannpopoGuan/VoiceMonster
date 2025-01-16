@@ -1,5 +1,5 @@
 extends Sprite2D
-
+var debug_mode = true
 var score = 0
 # Monster scale and blinking properties
 var scale_speed = 0.15  # Growth rate  
@@ -114,10 +114,11 @@ func _process(delta):
 			blink_timer = blink_duration  # Reset the timer
 	
 func _input(event):
-	if event.is_action_pressed("ui_accept") and not feedback_label.text.begins_with("Game Over"):
-		#emit_signal("monster_defeated", true)  # Emit defeat signal if monster is hit
-		handle_defeat(true)
-		#queue_free()  # Destroy the monster after it is defeated
+	if debug_mode:
+		if event.is_action_pressed("ui_accept") and not feedback_label.text.begins_with("Game Over"):
+			#emit_signal("monster_defeated", true)  # Emit defeat signal if monster is hit
+			handle_defeat(true)
+			#queue_free()  # Destroy the monster after it is defeated
 
 func handle_defeat(defeated_by_player: bool):
 	if is_defeated:

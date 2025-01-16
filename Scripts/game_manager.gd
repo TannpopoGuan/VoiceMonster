@@ -2,7 +2,8 @@ extends Control
 
 
 #Solution: Define game manager as global script
-
+var paused = false
+var esc_cooldown = false
 var score = 0
 #spawn monsters
 var spawn_count = 0       # Tracks the number of spawned monsters
@@ -39,8 +40,9 @@ func _ready() -> void:
 	spawn_monster()
 	
 	pass
-	
 
+
+	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

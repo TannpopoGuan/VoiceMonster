@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0ajjyhwg3wag"]
+[gd_scene load_steps=6 format=3 uid="uid://c0ajjyhwg3wag"]
 
+[ext_resource type="Script" path="res://Scenes/level_1.gd" id="1_jhsq2"]
+[ext_resource type="Texture2D" uid="uid://bth016xin0l1h" path="res://Sprites/PauseBoard.png" id="4_27a6f"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
 [ext_resource type="Script" path="res://Scripts/SpeechRecognizer.cs" id="7_m6g4b"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_751e5"]
 
 [node name="Level1" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_jhsq2")
 
 [node name="GameManager" type="Control" parent="."]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -52,3 +57,9 @@ offset_bottom = 23.0
 metadata/_edit_use_anchors_ = true
 
 [node name="MainTimer" type="Timer" parent="GameManager"]
+
+[node name="PauseBoard" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(513.5, 385)
+scale = Vector2(1.15533, 1.37388)
+texture = ExtResource("4_27a6f")
