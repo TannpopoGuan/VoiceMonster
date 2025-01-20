@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnlj51xh3tbq4"]
+
+[ext_resource type="Texture2D" uid="uid://b7j6m1errwpfo" path="res://Sprites/BackgroundStory.png" id="1_ilsmy"]
+[ext_resource type="VideoStream" path="res://intro.ogv" id="1_o2ph3"]
+[ext_resource type="Script" path="res://Scripts/intro_video.gd" id="2_obynq"]
+[ext_resource type="FontFile" uid="uid://bm7mqvqf7mdad" path="res://Fonts/Noto_Sans_JP/static/NotoSansJP-Medium.ttf" id="3_3ecye"]
+[ext_resource type="FontFile" uid="uid://b7uyjntwmv6k2" path="res://Fonts/Noto_Sans_JP/static/NotoSansJP-Bold.ttf" id="5_7oale"]
+
+[node name="IntroVideo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="intro_video" type="VideoStreamPlayer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_o2ph3")
+autoplay = true
+expand = true
+script = ExtResource("2_obynq")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.344055
+offset_top = -0.368042
+offset_right = -0.344116
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_fonts/font = ExtResource("3_3ecye")
+theme_override_font_sizes/font_size = 30
+text = "Press space to skip the story"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.677998, 0.677693)
+texture = ExtResource("1_ilsmy")
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1382.0
+offset_bottom = 1047.0
+theme_override_fonts/normal_font = ExtResource("5_7oale")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "In the shadowed alleys of Kyoto, beneath the glow of crimson maples, whispers tell of Kotodamajū, yokai born to guard the purity of Japanese.
+Legends say they draw power by absorbing the \"kotodama\" (spiritual energy of words) that resides in people's speech, and it is particularly sensitive to incorrect pronunciations or foreign accents.
+Lurking in ancient shrines, it punishes mispronunciations and foreign inflections. 
+Tonight, the city feels different. Something is listening…"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_fonts/font = ExtResource("5_7oale")
+theme_override_font_sizes/font_size = 25
+text = "In the shadowed alleys of Kyoto, beneath the glow of crimson maples, whispers tell of Kotodamajū, yokai born to guard the purity of Japanese.
+Legends say they draw power by absorbing the \"kotodama\" (spiritual energy of words) that resides in people's speech, and it is particularly sensitive to incorrect pronunciations or foreign accents.
+Lurking in ancient shrines, it punishes mispronunciations and foreign inflections. 
+Tonight, the city feels different. Something is listening…"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -503.0
+offset_top = -78.0
+offset_right = 504.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_fonts/font = ExtResource("5_7oale")
+theme_override_font_sizes/font_size = 25
+text = "In the shadowed alleys of Kyoto, 
+beneath the glow of crimson maples, whispers tell of Kotodamajū, 
+yokai born to guard the purity of Japanese.
+Legends say they draw power by absorbing the \"kotodama\" (spiritual energy of words) 
+that resides in people's speech, 
+and are particularly sensitive to incorrect pronunciations or foreign accents.
+Lurking in ancient shrines, it punishes mispronunciations and foreign inflections.
+ 
+Tonight, the city feels different. Something is listening…"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="finished" from="intro_video" to="intro_video" method="_on_finished"]

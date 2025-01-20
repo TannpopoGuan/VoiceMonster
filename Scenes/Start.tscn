@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba73ck556tcxp"]
+
+[ext_resource type="Script" path="res://Scripts/start.gd" id="1_pe70u"]
+[ext_resource type="Texture2D" uid="uid://bbji4wmu3vjii" path="res://Sprites/StartMonster.png" id="2_bi2lc"]
+[ext_resource type="FontFile" uid="uid://b7uyjntwmv6k2" path="res://Fonts/Noto_Sans_JP/static/NotoSansJP-Bold.ttf" id="3_0mt8a"]
+[ext_resource type="Script" path="res://Scripts/labelstartmonster.gd" id="3_5f3g0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pe70u")
+
+[node name="StartMonster" type="Sprite2D" parent="."]
+scale = Vector2(0.67763, 0.677672)
+texture = ExtResource("2_bi2lc")
+
+[node name="Label" type="Label" parent="StartMonster"]
+z_index = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1024.0
+offset_top = -450.0
+offset_right = -1024.0
+offset_bottom = -407.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_0mt8a")
+theme_override_font_sizes/font_size = 50
+text = "AudioMonster"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_5f3g0")

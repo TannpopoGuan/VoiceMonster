@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0ajjyhwg3wag"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
+[ext_resource type="Script" path="res://Scripts/SpeechRecognizer.cs" id="7_m6g4b"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_751e5"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="GameManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_1412g")
+
+[node name="SpeechRecognizer" type="Node" parent="GameManager"]
+script = ExtResource("7_m6g4b")
+
+[node name="MicrophoneStream" type="AudioStreamPlayer" parent="GameManager"]
+stream = SubResource("AudioStreamMicrophone_751e5")
+volume_db = 9.946
+autoplay = true
+bus = &"Record"
+
+[node name="ProgressLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="FeedbackLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MainTimerLabel" type="Label" parent="GameManager"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MainTimer" type="Timer" parent="GameManager"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0ajjyhwg3wag"]
+
+[ext_resource type="Script" path="res://Scripts/countdownLabel.gd" id="1_d0ywm"]
+[ext_resource type="Texture2D" uid="uid://buijr8myotlog" path="res://Sprites/Monster.png" id="2_hnnyb"]
+[ext_resource type="Script" path="res://Scripts/monster.gd" id="3_w5618"]
+[ext_resource type="FontFile" uid="uid://dn8f5hd0f37e4" path="res://Fonts/Kosugi_Maru/KosugiMaru-Regular.ttf" id="4_e6452"]
+[ext_resource type="Script" path="res://Scripts/monster_text.gd" id="5_inuno"]
+[ext_resource type="Script" path="res://Scenes/game_manager.gd" id="6_1412g"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="CountdownLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("4_e6452")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("1_d0ywm")
+
+[node name="Monster" type="Sprite2D" parent="."]
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("2_hnnyb")
+script = ExtResource("3_w5618")
+
+[node name="MonsterText" type="Label" parent="Monster"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("4_e6452")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("5_inuno")
+
+[node name="ProgressLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="FeedbackLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="GameManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_1412g")

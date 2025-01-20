@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0ajjyhwg3wag"]
+
+[ext_resource type="Texture2D" uid="uid://ocikstnj4t24" path="res://Sprites/LevelBG.png" id="1_pdxhs"]
+[ext_resource type="FontFile" uid="uid://b7uyjntwmv6k2" path="res://Fonts/Noto_Sans_JP/static/NotoSansJP-Bold.ttf" id="4_6y4no"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="6_1412g"]
+[ext_resource type="Script" path="res://Scripts/SpeechRecognizer.cs" id="7_m6g4b"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_751e5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qn2u"]
+bg_color = Color(0.854902, 0.854902, 0.854902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.282353, 0.25098, 0.258824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 13
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwd43"]
+bg_color = Color(0.882353, 0.396078, 0.364706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.282353, 0.25098, 0.258824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 13
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opelf"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.282353, 0.25098, 0.258824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 13
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[node name="Level1" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2048.0
+offset_bottom = 1536.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.678047, 0.676778)
+texture = ExtResource("1_pdxhs")
+
+[node name="GameManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_1412g")
+metadata/_edit_use_anchors_ = true
+
+[node name="SpeechRecognizer" type="Node" parent="GameManager"]
+script = ExtResource("7_m6g4b")
+
+[node name="MicrophoneStream" type="AudioStreamPlayer" parent="GameManager"]
+stream = SubResource("AudioStreamMicrophone_751e5")
+volume_db = 9.946
+autoplay = true
+bus = &"Record"
+
+[node name="ProgressLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 693.5
+offset_top = 20.0
+offset_right = 694.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.882353, 0.396078, 0.364706, 1)
+theme_override_fonts/font = ExtResource("4_6y4no")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="FeedbackLabel" type="Label" parent="GameManager"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 693.0
+offset_top = 900.0
+offset_right = 694.0
+offset_bottom = 923.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.882353, 0.396078, 0.364706, 1)
+theme_override_fonts/font = ExtResource("4_6y4no")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = 70.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("4_6y4no")
+theme_override_font_sizes/font_size = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="MainTimerLabel" type="Label" parent="GameManager"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("4_6y4no")
+theme_override_font_sizes/font_size = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameManager"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 617.0
+offset_top = 450.0
+offset_right = 767.0
+offset_bottom = 580.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Home" type="Button" parent="GameManager/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_fonts/font = ExtResource("4_6y4no")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_4qn2u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wwd43")
+theme_override_styles/normal = SubResource("StyleBoxFlat_opelf")
+text = "Home"
+
+[node name="MainTimer" type="Timer" parent="GameManager"]
+
+[connection signal="pressed" from="GameManager/VBoxContainer/Home" to="GameManager" method="_on_home_pressed"]

@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://unstbtpuybni"]
+
+[ext_resource type="Texture2D" uid="uid://54ji3e8yeofr" path="res://Sprites/Monster.png" id="1_uky23"]
+[ext_resource type="Script" path="res://Scripts/monster.gd" id="2_tjho4"]
+[ext_resource type="FontFile" uid="uid://dn8f5hd0f37e4" path="res://Fonts/Kosugi_Maru/KosugiMaru-Regular.ttf" id="3_hla1q"]
+[ext_resource type="Script" path="res://Scripts/monster_text.gd" id="4_2m2uq"]
+[ext_resource type="Script" path="res://Scripts/countdownLabel.gd" id="5_6n257"]
+[ext_resource type="Script" path="res://Scripts/IHearsYouSaid.gd" id="6_3gits"]
+
+[node name="Monster" type="Sprite2D"]
+position = Vector2(693.5, 520)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_uky23")
+script = ExtResource("2_tjho4")
+
+[node name="MonsterText" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1224.0
+offset_top = -468.0
+offset_right = -1223.0
+offset_bottom = -367.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+script = ExtResource("4_2m2uq")
+metadata/_edit_use_anchors_ = true
+
+[node name="CountdownLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 1.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("5_6n257")
+metadata/_edit_use_anchors_ = true
+
+[node name="IHeardYouSaid" type="Label" parent="."]
+offset_left = -202.5
+offset_top = 145.0
+offset_right = 637.5
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.282353, 0.25098, 0.258824, 1)
+theme_override_fonts/font = ExtResource("3_hla1q")
+theme_override_font_sizes/font_size = 120
+horizontal_alignment = 1
+script = ExtResource("6_3gits")
+metadata/_edit_use_anchors_ = true
