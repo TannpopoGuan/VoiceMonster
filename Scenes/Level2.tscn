@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cly2beua3pvn8"]
+[gd_scene load_steps=11 format=3 uid="uid://cly2beua3pvn8"]
 
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_kc7we"]
 [ext_resource type="Texture2D" uid="uid://ocikstnj4t24" path="res://Sprites/LevelBG.png" id="1_xjfxd"]
 [ext_resource type="Script" path="res://Scripts/game_manager2.gd" id="2_yul0d"]
 [ext_resource type="Script" path="res://Scripts/SpeechRecognizer.cs" id="3_obmnb"]
 [ext_resource type="FontFile" uid="uid://b7uyjntwmv6k2" path="res://Fonts/Noto_Sans_JP/static/NotoSansJP-Bold.ttf" id="4_xavrp"]
+[ext_resource type="Texture2D" uid="uid://rcwy3lahrs8o" path="res://Sprites/PauseBoard.png" id="6_2d1t3"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_751e5"]
 
@@ -53,8 +55,11 @@ expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
 [node name="Level2" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_kc7we")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,6 +71,7 @@ scale = Vector2(0.678047, 0.676778)
 texture = ExtResource("1_xjfxd")
 
 [node name="GameManager" type="Control" parent="."]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,5 +167,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_opelf")
 text = "Home"
 
 [node name="MainTimer" type="Timer" parent="GameManager"]
+
+[node name="PauseBoard" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(731, 552)
+texture = ExtResource("6_2d1t3")
 
 [connection signal="pressed" from="GameManager/VBoxContainer/Home" to="GameManager" method="_on_home_pressed"]

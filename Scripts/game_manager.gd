@@ -22,9 +22,9 @@ var monster_scene = preload("res://Monsters/monster.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	vbox_container.visible = false
-	if ReadyTracker.ready_set == true:
-		print("GameManager ready already executed, skipping.")
-		return
+	#if ReadyTracker.ready_set == true:
+	#	print("GameManager ready already executed, skipping.")
+	#	return
 	ReadyTracker.ready_set = true
 	#score
 	# Your one-time initialization code here
